@@ -1,0 +1,2 @@
+include ':expand-collapse-text-view'
+include ':app'

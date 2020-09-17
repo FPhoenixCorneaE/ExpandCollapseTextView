@@ -1,29 +1,17 @@
-# ExpandCollapseTextView
-展开折叠文本视图
+package com.fphoenixcorneae.widget.demo
 
+import android.graphics.Color
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_main.*
 
-How to include it in your project:
---------------
-**Step 1.** Add the JitPack repository to your build file
-```groovy
-allprojects {
-	repositories {
-		...
-		maven { url 'https://jitpack.io' }
-	}
-}
-```
+class MainActivity : AppCompatActivity() {
 
-**Step 2.** Add the dependency
-```groovy
-dependencies {
-	implementation 'com.github.FPhoenixCorneaE:ExpandCollapseTextView:1.0.0'
-}
-```
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-#### 属性
-```kotlin
-tvDesc.apply {
+        tvDesc.apply {
             // 设置最大显示行数
             mMaxLineCount = 3
             // 收起文案
@@ -41,4 +29,5 @@ tvDesc.apply {
             // 设置要显示的文字以及状态
             setText(getString(R.string.desc), false)
         }
-```
+    }
+}
