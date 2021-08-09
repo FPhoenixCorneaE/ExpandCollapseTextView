@@ -1,2 +1,3 @@
-include ':expand-collapse-text-view'
+include ':expandCollapseTextView'
 include ':app'
+rootProject.name = "ExpandCollapseTextView"

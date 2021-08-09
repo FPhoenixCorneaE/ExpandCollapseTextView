@@ -1,21 +1,21 @@
 package com.fphoenixcorneae.widget.demo
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.fphoenixcorneae.widget.demo.databinding.FragmentItemListBinding
 import com.fphoenixcorneae.widget.demo.dummy.DummyContent
-import kotlinx.android.synthetic.main.fragment_item_list.*
 
 /**
  * A fragment representing a list of Items.
  */
 class SampleFragment : Fragment() {
 
+    private var mViewBinding: FragmentItemListBinding? = null
     private var columnCount = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,21 +26,28 @@ class SampleFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_item_list, container, false)
-        return view
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
+        mViewBinding = FragmentItemListBinding.inflate(inflater)
+        return mViewBinding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with(list){
+        with(mViewBinding!!.list) {
             layoutManager = when {
                 columnCount <= 1 -> LinearLayoutManager(context)
                 else -> GridLayoutManager(context, columnCount)
             }
             adapter = MySampleRecyclerViewAdapter(DummyContent.ITEMS)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mViewBinding = null
     }
 
     companion object {
@@ -51,10 +58,10 @@ class SampleFragment : Fragment() {
         // TODO: Customize parameter initialization
         @JvmStatic
         fun newInstance(columnCount: Int) =
-                SampleFragment().apply {
-                    arguments = Bundle().apply {
-                        putInt(ARG_COLUMN_COUNT, columnCount)
-                    }
+            SampleFragment().apply {
+                arguments = Bundle().apply {
+                    putInt(ARG_COLUMN_COUNT, columnCount)
                 }
+            }
     }
 }

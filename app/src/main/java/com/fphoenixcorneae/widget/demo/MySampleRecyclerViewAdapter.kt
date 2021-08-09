@@ -1,15 +1,12 @@
 package com.fphoenixcorneae.widget.demo
 
 import android.graphics.Color
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import com.fphoenixcorneae.widget.ExpandCollapseTextView
-
+import androidx.recyclerview.widget.RecyclerView
+import com.fphoenixcorneae.widget.demo.databinding.FragmentItemBinding
 import com.fphoenixcorneae.widget.demo.dummy.DummyContent.DummyItem
-import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem].
@@ -26,21 +23,21 @@ class MySampleRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.tvDesc.apply {
+        holder.viewBinding.tvDesc.apply {
             // 设置最大显示行数
-            mMaxLineCount = 3
+            maxLineCount = 3
             // 收起文案
-            mCollapseText = "收起全部"
+            collapseText = "收起全部"
             // 展开文案
-            mExpandText = "查看全文"
+            expandText = "查看全文"
             // 是否支持收起功能
-            mCollapseEnable = true
+            collapseEnable = true
             // 是否给展开收起添加下划线
-            mUnderlineEnable = false
+            underlineEnable = false
             // 收起文案颜色
-            mCollapseTextColor = Color.BLUE
+            collapseTextColor = Color.BLUE
             // 展开文案颜色
-            mExpandTextColor = Color.RED
+            expandTextColor = Color.RED
             setText(context.getString(R.string.desc), false)
         }
     }
@@ -48,6 +45,6 @@ class MySampleRecyclerViewAdapter(
     override fun getItemCount(): Int = values.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tvDesc: ExpandCollapseTextView = view.findViewById(R.id.tvDesc)
+        val viewBinding:FragmentItemBinding= FragmentItemBinding.bind(view)
     }
 }

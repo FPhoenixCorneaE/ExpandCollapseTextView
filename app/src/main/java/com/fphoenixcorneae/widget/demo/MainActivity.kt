@@ -3,31 +3,39 @@ package com.fphoenixcorneae.widget.demo
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import com.fphoenixcorneae.widget.demo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    private var mViewBinding: ActivityMainBinding? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        mViewBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(mViewBinding!!.root)
 
-        tvDesc.apply {
+        mViewBinding!!.tvDesc.apply {
             // 设置最大显示行数
-            mMaxLineCount = 3
+            maxLineCount = 3
             // 收起文案
-            mCollapseText = "收起全部"
+            collapseText = "收起全部"
             // 展开文案
-            mExpandText = "查看全文"
+            expandText = "查看全文"
             // 是否支持收起功能
-            mCollapseEnable = true
+            collapseEnable = false
             // 是否给展开收起添加下划线
-            mUnderlineEnable = false
+            underlineEnable = false
             // 收起文案颜色
-            mCollapseTextColor = Color.BLUE
+            collapseTextColor = Color.BLUE
             // 展开文案颜色
-            mExpandTextColor = Color.RED
+            expandTextColor = Color.RED
             // 设置要显示的文字以及状态
             setText(getString(R.string.desc), false)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mViewBinding = null
     }
 }
